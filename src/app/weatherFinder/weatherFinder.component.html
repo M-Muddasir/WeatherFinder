@@ -1,0 +1,27 @@
+<div class="weather-data layout-column align-items-center mt-50">
+  <section class="layout-row align-items-center justify-content-center">
+      <input type="text" class="large ml-30" placeholder="Dallas" data-test-id="app-input" #search/>
+      <button class="" data-test-id="submit-button" (click)="onSearch(search)">Search</button>
+  </section>
+
+  <section class="mt-20 layout-row align-items-center justify-content-center">
+    <div class="card outlined" *ngIf="responseData?.length">
+        <div *ngFor="let data of responseData" data-test-id="weather-details" class="card-text pt-10 layout-row justify-content-between">
+            <div class="mt-20 outlined">
+              <i *ngIf="(data?.weather?.split(' ')[0])>=20" data-test-id="icon-sunny" class="material-icons">wb_sunny</i>
+              <i *ngIf="(data?.weather?.split(' ')[0])<20" data-test-id="icon-cold" class="material-icons">ac_unit</i>
+              <span data-test-id="result-temperature" class="temperature"> {{data?.weather}}</span>
+            </div>
+            <div class="mr-15 mb-15">
+              <div data-test-id="result-wind" class="mt-20">
+                {{data?.status[0]}}
+              </div>
+              <div data-test-id="result-humidity" class="mt-20">
+                {{data?.status[1]}}
+              </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!responseData?.length" data-test-id="no-result" class="layout-row justify-content-center align-items-center card-text" >No Results Found</div>
+  </section>
+</div>
